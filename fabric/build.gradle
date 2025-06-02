@@ -47,7 +47,7 @@ loom {
 
 modrinth {
 	token = System.getenv("MODRINTH_TOKEN")
-	projectId = "intheoxygen"
+	projectId = "intheair"
 	versionNumber = "${minecraft_version}-fabric-${version}"
 	versionType = "release"
 	uploadFile = remapJar

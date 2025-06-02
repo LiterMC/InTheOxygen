@@ -69,7 +69,7 @@ jar {
 
 modrinth {
 	token = System.getenv("MODRINTH_TOKEN")
-	projectId = "intheoxygen"
+	projectId = "intheair"
 	versionNumber = "${minecraft_version}-forge-${version}"
 	versionType = "release"
 	uploadFile = jar
