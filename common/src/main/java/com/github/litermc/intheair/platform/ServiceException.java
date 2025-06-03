@@ -16,10 +16,10 @@ import java.io.Serial;
  */
 @ApiStatus.Internal
 class ServiceException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = -8392300691666423882L;
+	@Serial
+	private static final long serialVersionUID = -8392300691666423882L;
 
-    ServiceException(String message, @Nullable Throwable cause) {
-        super(message, cause);
-    }
+	ServiceException(String message, @Nullable Throwable cause) {
+		super(message, cause);
+	}
 }

@@ -16,10 +16,10 @@ import java.util.function.Supplier;
  * @see RegistrationHelper
  */
 public interface RegistryEntry<U> extends Supplier<U> {
-    /**
-     * Get the ID of this registered item.
-     *
-     * @return This registered item.
-     */
-    ResourceLocation id();
+	/**
+	 * Get the ID of this registered item.
+	 *
+	 * @return This registered item.
+	 */
+	ResourceLocation id();
 }

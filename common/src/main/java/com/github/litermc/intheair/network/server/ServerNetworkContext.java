@@ -10,10 +10,10 @@ import net.minecraft.server.level.ServerPlayer;
  * The context under which serverbound packets are evaluated.
  */
 public interface ServerNetworkContext {
-    /**
-     * Get the player who sent this packet.
-     *
-     * @return The sending player.
-     */
-    ServerPlayer getSender();
+	/**
+	 * Get the player who sent this packet.
+	 *
+	 * @return The sending player.
+	 */
+	ServerPlayer getSender();
 }
