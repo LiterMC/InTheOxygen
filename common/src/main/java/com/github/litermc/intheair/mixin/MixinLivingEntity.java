@@ -1,8 +1,10 @@
 package com.github.litermc.intheair.mixin;
 
+import com.github.litermc.intheair.ITAConfig;
 import com.github.litermc.intheair.accessor.ILivingEntityLungAccessor;
 import com.github.litermc.intheair.api.gas.Gas;
 import com.github.litermc.intheair.api.gas.GasStack;
+import com.github.litermc.intheair.gas.Gases;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -41,7 +43,7 @@ public abstract class MixinLivingEntity extends Entity implements ILivingEntityL
 
 	@Override
 	public GasStack ita$getGasInEntity(final Gas gas) {
-		return this.lung.get(gas);
+		return this.lung.computeIfAbsent(gas, (k) -> new GasStack(k, 0));
 	}
 
 	@Override
@@ -97,8 +99,10 @@ public abstract class MixinLivingEntity extends Entity implements ILivingEntityL
 			for (int i = 0; i < 16; i++) {
 				air = this.decreaseAirSupply(air);
 			}
-			boolean hasAirSupply = !this.isEyeInFluid(FluidTags.WATER);
-			if (hasAirSupply) {
+			final GasStack oxygen = this.ita$getGasInEntity(Gases.OXYGEN);
+			final int needsOxygen = ITAConfig.getInstance().getEntityOxygenConsumeRate(this);
+			if (oxygen.getMass() >= needsOxygen) {
+				oxygen.shrink(needsOxygen);
 				for (int i = 0; i < 5; i++) {
 					air = this.increaseAirSupply(air);
 				}

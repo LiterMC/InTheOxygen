@@ -1,6 +1,6 @@
 package com.github.litermc.intheair;
 
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
 
 public abstract class ITAConfig {
 	public static ITAConfig getInstance() {
@@ -30,12 +30,12 @@ public abstract class ITAConfig {
 	/**
 	 * @return lung volume in mB
 	 */
-	public abstract int getEntityLungVolume(LivingEntity entity);
+	public abstract int getEntityLungVolume(Entity entity);
 
 	/**
 	 * @return oxygen consume rate in g/s
 	 */
-	public abstract int getEntityOxygenConsumeRate(LivingEntity entity);
+	public abstract int getEntityOxygenConsumeRate(Entity entity);
 
 	private static final ITAConfig TEST_INSTANCE = new ITAConfig() {
 		@Override
@@ -59,12 +59,12 @@ public abstract class ITAConfig {
 		}
 
 		@Override
-		public int getEntityLungVolume(LivingEntity entity) {
+		public int getEntityLungVolume(Entity entity) {
 			return 10;
 		}
 
 		@Override
-		public int getEntityOxygenConsumeRate(LivingEntity entity) {
+		public int getEntityOxygenConsumeRate(Entity entity) {
 			return 8;
 		}
 	};
