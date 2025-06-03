@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class OxygenGas extends Gas {
 	public OxygenGas(final Properties props) {
@@ -15,10 +16,11 @@ public class OxygenGas extends Gas {
 
 	@Override
 	public void onEntityTick(final Entity entity, final GasStack gas) {
-		// if (entity.)
+		super.onEntityTick(entity, gas);
 	}
 
 	@Override
-	public void onBlockTick(final Level level, final BlockPos pos, final Direction direction, final GasStack gas) {
+	public void onBlockTick(final Level level, final BlockPos pos, final BlockState block, final Direction direction, final GasStack gas) {
+		super.onBlockTick(level, pos, block, direction, gas);
 	}
 }

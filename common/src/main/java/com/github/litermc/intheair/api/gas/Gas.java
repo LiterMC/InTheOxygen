@@ -1,15 +1,26 @@
 package com.github.litermc.intheair.api.gas;
 
+import com.github.litermc.intheair.Constants;
+import com.github.litermc.intheair.api.block.IGasTickableBlock;
+import com.github.litermc.intheair.api.entity.IGasTickableEntity;
+import com.github.litermc.intheair.platform.PlatformHelper;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
 public abstract class Gas {
+	public static final ResourceKey<Registry<Gas>> REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(Constants.MOD_ID, "gas"));
+
 	private final Fluid fluid;
 	private final int fluidNeeds;
 	private final Block block;
@@ -50,10 +61,20 @@ public abstract class Gas {
 		return this.blockNeeds;
 	}
 
-	public void onEntityTick(final Entity entity, final GasStack gas) {
+	public ResourceLocation getRegistryName() {
+		return PlatformHelper.get().getRegistryKey(REGISTRY_KEY, this);
 	}
 
-	public void onBlockTick(final Level level, final BlockPos pos, final Direction direction, final GasStack gas) {
+	public void onEntityTick(final Entity entity, final GasStack gas) {
+		if (entity instanceof IGasTickableEntity tickable) {
+			tickable.onGasTick(gas);
+		}
+	}
+
+	public void onBlockTick(final Level level, final BlockPos pos, final BlockState block, final Direction direction, final GasStack gas) {
+		if (block.getBlock() instanceof IGasTickableBlock tickable) {
+			tickable.onGasTick(level, pos, block, direction, gas);
+		}
 	}
 
 	public static class Properties {

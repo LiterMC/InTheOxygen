@@ -1,8 +1,10 @@
 package com.github.litermc.intheair.api.gas;
 
 import com.github.litermc.intheair.gas.Gases;
+import com.github.litermc.intheair.platform.PlatformHelper;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 
 public final class GasStack {
 	public static final GasStack EMPTY = new GasStack(null, 0);
@@ -83,13 +85,16 @@ public final class GasStack {
 	}
 
 	public CompoundTag writeToNBT(CompoundTag data) {
-		data.putString("Gas", this.gas.toString()); // TODO: replace with registry
+		data.putString("Gas", this.gas.getRegistryName().toString());
 		data.putInt("Mass", this.mass);
 		return data;
 	}
 
 	public static GasStack readFromNBT(CompoundTag data) {
-		final Gas gas = null; // data.getString("Gas");
+		Gas gas = PlatformHelper.get().tryGetRegistryObject(Gas.REGISTRY_KEY, new ResourceLocation(data.getString("Gas")));
+		if (gas == null) {
+			gas = Gases.AIR;
+		}
 		final int mass = data.getInt("Mass");
 		return new GasStack(gas, mass);
 	}
