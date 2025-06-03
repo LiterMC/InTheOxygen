@@ -1,5 +1,6 @@
 package com.github.litermc.intheair.api;
 
+import com.github.litermc.intheair.accessor.ILivingEntityLungAccessor;
 import com.github.litermc.intheair.api.gas.Gas;
 import com.github.litermc.intheair.api.gas.GasStack;
 
@@ -17,15 +18,25 @@ public abstract class ITAApi {
 
 	private ITAApi() {}
 
-	public abstract GasStack getGasInEntity(final LivingEntity entity, final Gas gas);
+	public GasStack getGasInEntity(final LivingEntity entity, final Gas gas) {
+		return ((ILivingEntityLungAccessor) (entity)).ita$getGasInEntity(gas);
+	}
 
-	public abstract void setGasInEntity(final LivingEntity entity, final GasStack gas);
+	public void setGasInEntity(final LivingEntity entity, final GasStack gas) {
+		((ILivingEntityLungAccessor) (entity)).ita$setGasInEntity(gas);
+	}
 
-	public abstract GasStack addGasInEntity(final LivingEntity entity, final GasStack gas);
+	public GasStack addGasInEntity(final LivingEntity entity, final GasStack gas) {
+		return ((ILivingEntityLungAccessor) (entity)).ita$addGasInEntity(gas);
+	}
 
-	public abstract Collection<GasStack> getGasesInEntity(final LivingEntity entity);
+	public Collection<GasStack> getGasesInEntity(final LivingEntity entity) {
+		return ((ILivingEntityLungAccessor) (entity)).ita$getGasesInEntity();
+	}
 
-	public abstract void clearGasesInEntity(final LivingEntity entity);
+	public void clearGasesInEntity(final LivingEntity entity) {
+		((ILivingEntityLungAccessor) (entity)).ita$clearGasesInEntity();
+	}
 
 	public abstract GasStack getGasInBlock(final Level level, final BlockPos pos, final Direction direction, final Gas gas);
 

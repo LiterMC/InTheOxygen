@@ -2,6 +2,8 @@ package com.github.litermc.intheair.api.gas;
 
 import com.github.litermc.intheair.gas.Gases;
 
+import net.minecraft.nbt.CompoundTag;
+
 public final class GasStack {
 	public static final GasStack EMPTY = new GasStack(null, 0);
 
@@ -78,5 +80,17 @@ public final class GasStack {
 	@Override
 	public String toString() {
 		return this.mass + " " + this.gas;
+	}
+
+	public CompoundTag writeToNBT(CompoundTag data) {
+		data.putString("Gas", this.gas.toString()); // TODO: replace with registry
+		data.putInt("Mass", this.mass);
+		return data;
+	}
+
+	public static GasStack readFromNBT(CompoundTag data) {
+		final Gas gas = null; // data.getString("Gas");
+		final int mass = data.getInt("Mass");
+		return new GasStack(gas, mass);
 	}
 }
