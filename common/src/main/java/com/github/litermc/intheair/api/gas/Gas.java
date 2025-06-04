@@ -22,15 +22,15 @@ public abstract class Gas {
 	public static final ResourceKey<Registry<Gas>> REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(Constants.MOD_ID, "gas"));
 
 	private final Fluid fluid;
-	private final int fluidNeeds;
+	private final int fluidDensity;
 	private final Block block;
-	private final int blockNeeds;
+	private final int blockDensity;
 
 	public Gas(Properties props) {
 		this.fluid = props.fluid;
-		this.fluidNeeds = props.fluidNeeds;
+		this.fluidDensity = props.fluidDensity;
 		this.block = props.block;
-		this.blockNeeds = props.blockNeeds;
+		this.blockDensity = props.blockDensity;
 	}
 
 	/**
@@ -41,10 +41,10 @@ public abstract class Gas {
 	}
 
 	/**
-	 * @return The mass of the gas (g) needed to form up 1B fluid. Will return {@code 0} if no fluid form is presented.
+	 * @return The mass (g) of 1B fluid. Will return {@code 0} if no fluid form is presented.
 	 */
-	public final int getFluidNeeds() {
-		return this.fluidNeeds;
+	public final int getFluidDensity() {
+		return this.fluidDensity;
 	}
 
 	/**
@@ -55,10 +55,10 @@ public abstract class Gas {
 	}
 
 	/**
-	 * @return The mass of the gas (g) needed to form up a block. Will return {@code 0} if no block form is presented.
+	 * @return The mass (g) of a block. Will return {@code 0} if no block form is presented.
 	 */
-	public final int getBlockNeeds() {
-		return this.blockNeeds;
+	public final int getBlockDensity() {
+		return this.blockDensity;
 	}
 
 	public ResourceLocation getRegistryName() {
@@ -79,39 +79,39 @@ public abstract class Gas {
 
 	public static class Properties {
 		Fluid fluid = Fluids.EMPTY;
-		int fluidNeeds = 0;
+		int fluidDensity = 0;
 		Block block = Blocks.AIR;
-		int blockNeeds = 0;
+		int blockDensity = 0;
 
 		/**
 		 * @param fluid Fluid form of the gas
-		 * @param fluidNeeds The mass of the gas (g) needed to form up 1B fluid.
+		 * @param fluidDensity The mass (g) of 1B fluid.
 		 */
-		public Properties withFluidForm(Fluid fluid, int fluidNeeds) {
+		public Properties withFluidForm(Fluid fluid, int fluidDensity) {
 			this.fluid = fluid;
-			this.fluidNeeds = fluidNeeds;
+			this.fluidDensity = fluidDensity;
 			return this;
 		}
 
 		public Properties withoutFluidForm() {
 			this.fluid = Fluids.EMPTY;
-			this.fluidNeeds = 0;
+			this.fluidDensity = 0;
 			return this;
 		}
 
 		/**
 		 * @param block Block form of the gas
-		 * @param blockNeeds The mass of the gas (g) needed to form up a block.
+		 * @param blockDensity The mass (g) of a block.
 		 */
-		public Properties withBlockForm(Block block, int blockNeeds) {
+		public Properties withBlockForm(Block block, int blockDensity) {
 			this.block = block;
-			this.blockNeeds = blockNeeds;
+			this.blockDensity = blockDensity;
 			return this;
 		}
 
 		public Properties withoutBlockForm() {
 			this.block = Blocks.AIR;
-			this.blockNeeds = 0;
+			this.blockDensity = 0;
 			return this;
 		}
 	}

@@ -8,16 +8,6 @@ public abstract class ITAConfig {
 	}
 
 	/**
-	 * @return minimum oxygen density to breath in g/m^3
-	 */
-	public abstract int getMinimumOxygenDensityForBreath();
-
-	/**
-	 * @return maximum oxygen density to breath in g/m^3
-	 */
-	public abstract int getMaximumOxygenDensityForBreath();
-
-	/**
 	 * @return minimum air density to live in g/m^3
 	 */
 	public abstract int getMinimumAirDensityToLive();
@@ -38,16 +28,6 @@ public abstract class ITAConfig {
 	public abstract int getEntityOxygenConsumeRate(Entity entity);
 
 	private static final ITAConfig TEST_INSTANCE = new ITAConfig() {
-		@Override
-		public int getMinimumOxygenDensityForBreath() {
-			return 1000;
-		}
-
-		@Override
-		public int getMaximumOxygenDensityForBreath() {
-			return 2000;
-		}
-
 		@Override
 		public int getMinimumAirDensityToLive() {
 			return 700;
